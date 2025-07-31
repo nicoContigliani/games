@@ -14,7 +14,8 @@ import {
   InputAdornment,
   IconButton,
   SxProps,
-  Theme
+  Theme,
+  CircularProgress
 } from '@mui/material';
 import { useForm, SubmitHandler, FormProvider, UseFormReturn, FieldValues } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -52,7 +53,7 @@ export type FormConfig = {
   defaultTab?: number;
   isMobile?: boolean;
   isTablet?: boolean;
-  submitButtonText?: string | ((currentTab: number) => string);
+  submitButtonText?: string | ((currentTab: number) => string) | React.ReactNode;
   resetButtonText?: string;
   showResetButton?: boolean;
   onSubmit: SubmitHandler<any>;
@@ -61,7 +62,10 @@ export type FormConfig = {
     title?: string | ((currentTab: number) => string);
     subtitle?: string | ((currentTab: number) => string);
     icon?: React.ReactNode;
-    sx?: SxProps<Theme>;
+    sx?: {
+      title?: SxProps<Theme>;
+      subtitle?: SxProps<Theme>;
+    } & SxProps<Theme>;
   };
   footer?: React.ReactNode;
   sx?: {
@@ -99,7 +103,7 @@ const DynamicForm: React.FC<FormConfig> = ({
   const [currentTab, setCurrentTab] = React.useState(defaultTab);
   const [showPassword, setShowPassword] = React.useState(false);
   const methods = useForm();
-  const { handleSubmit, reset, formState: { errors } } = methods;
+  const { handleSubmit, reset, formState: { errors, isSubmitting } } = methods;
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue);
@@ -222,8 +226,7 @@ const DynamicForm: React.FC<FormConfig> = ({
           <Box sx={{
             textAlign: 'center' as const,
             mb: isMobile ? 1 : 3,
-            ...header.sx,
-            ...sx.header
+            ...header.sx
           } as SxProps<Theme>}>
             {header.icon && (
               <Box sx={{ mb: 1 }}>
@@ -313,6 +316,7 @@ const DynamicForm: React.FC<FormConfig> = ({
                 variant="contained"
                 fullWidth
                 size={isMobile ? 'medium' : 'large'}
+                disabled={isSubmitting}
                 sx={{
                   bgcolor: 'error.main',
                   color: '#fff',
@@ -327,6 +331,11 @@ const DynamicForm: React.FC<FormConfig> = ({
                     bgcolor: 'error.dark',
                     transform: 'translateY(-2px)',
                     boxShadow: '0 4px 12px rgba(255, 50, 50, 0.4)'
+                  },
+                  '&:disabled': {
+                    bgcolor: 'action.disabled',
+                    transform: 'none',
+                    boxShadow: 'none'
                   }
                 } as SxProps<Theme>}
               >
