@@ -3,27 +3,30 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import ChatComponent from '@/components/prueba/ChatComponent';
 
 const BingoScreen: NextPage = () => {
 
 
-  return (
-    <>
-      <Head>
-        <title>juegos</title>
-        <meta name="description" content="Un juego simple hecho con Next.js" />
-      </Head>
+    return (
+        <>
+            <Head>
+                <title>juegos</title>
+                <meta name="description" content="Un juego simple hecho con Next.js" />
+            </Head>
 
-      <main className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
-        <Image
-          src="/images/fondo.png"
-          alt="hex bg"
-          fill
-          style={{ objectFit: 'cover', opacity: 0.99, zIndex: 0 }}
-        />
-      </main>
-    </>
-  );
+            <main className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
+                {/* <Image
+                    src="/images/fondo.png"
+                    alt="hex bg"
+                    fill
+                    style={{ objectFit: 'cover', opacity: 0.09, zIndex: 0 }}
+                /> */}
+                <ChatComponent />
+
+            </main>
+        </>
+    );
 };
 
 export default BingoScreen;

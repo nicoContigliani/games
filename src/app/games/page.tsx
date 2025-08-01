@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import ChatComponent from '@/components/prueba/ChatComponent';
 
 const GameScreen: NextPage = () => {
 

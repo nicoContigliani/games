@@ -862,7 +862,7 @@ export default function AuthPage() {
 
   useEffect(() => {
     if (isAuthenticated && !authLoading) {
-      router.push('/dashboard');
+      router.push('/games');
     }
   }, [isAuthenticated, authLoading, router]);
 

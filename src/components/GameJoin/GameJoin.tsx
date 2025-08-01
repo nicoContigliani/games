@@ -1,4 +1,5 @@
 import React from 'react'
+import ChatComponent from '../prueba/ChatComponent'
 
 const GameJoin = () => {
    //create place
@@ -7,6 +8,7 @@ const GameJoin = () => {
     return (
         <div>
             GameJoin
+            
         </div>
     )
 }
